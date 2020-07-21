@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./App.css";
 import Axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -11,7 +11,7 @@ import Alert from "./components/Alert";
 
 import  'bootstrap/dist/css/bootstrap.min.css';
 function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("porridge");
   const [recipes, setRecipes] = useState([]);
   const [alert, setAlert] = useState("");
 
@@ -34,7 +34,11 @@ function App() {
       setAlert("Please fill the form");
     }
   };
-
+  useEffect(() => {
+    return () => {
+        getData();
+    };
+}, [])
   const onChange = e => setQuery(e.target.value);
 
   const onSubmit = e => {
@@ -42,7 +46,7 @@ function App() {
   
     getData();
   };
-
+ 
   return (
 
     <div className="App animated" >
